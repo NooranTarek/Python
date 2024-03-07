@@ -195,28 +195,28 @@ def edit_project(user):
             if data:
                 projects = json.loads(data)
     print("______________________________________________________")
-    print("Your Projects:")
+    print("your projects:")
     user_projects = [project for project in projects if project['createdBy'] == user['email']]
     for i, project in enumerate(user_projects, start=1):
         print(f"{i}. Title: {project['title']}, Created By: {project['createdBy']}")
 
     if not user_projects:
-        print("You have no projects to edit.")
+        print("no projects to edit")
         return
 
-    choice = input("Enter the number of the project you want to edit: ")
+    choice = input("write the number of the project you want to edit: ")
     if not choice.isdigit() or int(choice) < 1 or int(choice) > len(user_projects):
-        print("Invalid choice.")
+        print("sorry invalid choice")
         return
 
     project_to_edit = user_projects[int(choice) - 1]
-    print("Enter new details for the project:")
+    print("enter new details for the project:")
     project_to_edit['title'] = input(f"New title [{project_to_edit['title']}]: ") or project_to_edit['title']
     project_to_edit['details'] = input(f"New details [{project_to_edit['details']}]: ") or project_to_edit['details']
     project_to_edit['totalTarget'] = float(input(f"New total target [{project_to_edit['totalTarget']}]: ") or project_to_edit['totalTarget'])
     project_to_edit['startTime'] = input(f"New start time [{project_to_edit['startTime']}]: ") or project_to_edit['startTime']
     project_to_edit['endTime'] = input(f"New end time [{project_to_edit['endTime']}]: ") or project_to_edit['endTime']
-    print("Project updated successfully!")
+    print("project updated successfully!")
     def save_edited_projects(projects):
         with open("projects.json", "w") as file:
           json.dump(projects, file)
@@ -228,23 +228,23 @@ def delete_project(user):
             if data:
                 projects = json.loads(data)
     print("______________________________________________________")
-    print("Your Projects:")
+    print("your projects:")
     user_projects = [project for project in projects if project['createdBy'] == user['email']]
     for i, project in enumerate(user_projects, start=1):
         print(f"{i}. Title: {project['title']}, Created By: {project['createdBy']}")
 
     if not user_projects:
-        print("You have no projects to delete.")
+        print("no projects to delete")
         return
 
-    choice = input("Enter the number of the project you want to delete: ")
+    choice = input("write the number of the project you want to delete: ")
     if not choice.isdigit() or int(choice) < 1 or int(choice) > len(user_projects):
-        print("Invalid choice.")
+        print("sorry invalid choice.")
         return
 
     project_to_delete = user_projects[int(choice) - 1]
     projects.remove(project_to_delete)
-    print("Project deleted successfully!")
+    print("project deleted successfully!")
     def projects_after_delete(projects):
         with open("projects.json", "w") as file:
           json.dump(projects, file)
